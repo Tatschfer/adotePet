@@ -10,7 +10,7 @@ namespace adotePet.Repositories
         Task<Pet?> GetByIdAsync(int idPet);
         Task<Pet?> InsertPet(Pet pet);
 
-        Task<bool> UpdatePet(int  id, Pet pet);
+        Task<bool> UpdatePet(int  idPet, Pet pet);
 
         Task<bool> DeletePet(int idPet);    
     }

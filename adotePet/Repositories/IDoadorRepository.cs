@@ -10,6 +10,6 @@ namespace adotePet.Repositories
         Task<Doador?> GetByIdAsync(int idDoador);
         Task<Doador?> InsertDoador(Doador doador);
         Task<bool> DeleteDoador(int idDoador);
-        Task<bool> UpdateDoador(Doador doador);
+        Task<bool> UpdateDoador(int idDoador, Doador doador);
     }
 }

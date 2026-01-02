@@ -47,9 +47,15 @@ namespace adotePet.Controllers
             return Ok("Pet removido com sucesso.");
         }
 
-        [HttpPut]
-        public async Task<IActionResult> AtualizarPet([FromBody] Models.Pet pet, int id)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AtualizarPet(
+            
+            [FromBody] Models.Pet pet, 
+            [FromRoute] int id)
         {
+
+            pet.idPet = id;
+
             var petExistente = await _repo.GetByIdAsync(id);
             if (petExistente == null)
                 return NotFound();

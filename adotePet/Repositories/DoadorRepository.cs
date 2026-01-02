@@ -17,9 +17,9 @@ namespace adotePet.Repositories
             const string sql = @"
                 SELECT 
                     idDoador,
-                    nomeDoador,
-                    telefoneDoador,
-                    emailDoador
+                    nome,
+                    telefone,
+                    email
                 FROM doadores;";
 
             return await _db.QueryAsync<Doador>(sql);
@@ -30,9 +30,9 @@ namespace adotePet.Repositories
             const string sql = @"
                 SELECT 
                     idDoador,
-                    nomeDoador,
-                    telefoneDoador,
-                    emailDoador
+                    nome,
+                    telefone,
+                    email
                 FROM doadores 
                 WHERE idDoador = @Id;";
             return await _db.QueryFirstOrDefaultAsync<Doador>(sql, new { Id = idDoador });
@@ -41,42 +41,42 @@ namespace adotePet.Repositories
         public async Task<Doador?> InsertDoador(Doador doador)
         {
             const string sql = @"
-                INSERT INTO doadores (nomeDoador, telefoneDoador, emailDoador) 
-                VALUES (@nomeDoador, @telefoneDoador, @emailDoador);
-                SELECT CAST(SCOPE_IDENTITY() as int);";
+                INSERT INTO doadores (nome, telefone, email) 
+                VALUES (@nome, @telefone, @email);
+                SELECT LAST_INSERT_ID();";
             var id = await _db.QuerySingleAsync<int>(sql, new
             {
-                NomeDoador = doador.nomeDoador,
-                TelefoneDoador = doador.telefoneDoador,
-                EmailDoador = doador.emailDoador
+                Nome = doador.nome,
+                Telefone = doador.telefone,
+                Email = doador.email
             });
 
             doador.idDoador = id;
             return doador;
         }
 
-        public async Task<bool> DeleteDoador(int idDoador)
+        public async Task<bool> DeleteDoador(int id)
         {
             const string sql = @"
                 DELETE FROM doadores 
                 WHERE idDoador = @Id;";
-            var rowsAffected = await _db.ExecuteAsync(sql, new { Id = idDoador });
+            var rowsAffected = await _db.ExecuteAsync(sql, new { Id = id });
             return rowsAffected > 0;
         }
 
-        public async Task<bool> UpdateDoador(Doador doador)
+        public async Task<bool> UpdateDoador(int id, Doador doador)
         {
             const string sql = @"
                 UPDATE doadores 
-                SET nomeDoador = @nomeDoador, 
-                    telefoneDoador = @telefoneDoador, 
-                    emailDoador = @emailDoador
-                WHERE idDoador = @idDoador;";
+                SET nome = @nome, 
+                    telefone = @telefone, 
+                    email = @email
+                WHERE IdDoador = @idDoador;";
             var rowsAffected = await _db.ExecuteAsync(sql, new
             {
-                NomeDoador = doador.nomeDoador,
-                TelefoneDoador = doador.telefoneDoador,
-                EmailDoador = doador.emailDoador,
+                Nome = doador.nome,
+                Telefone = doador.telefone,
+                Email = doador.email,
                 IdDoador = doador.idDoador
             });
             return rowsAffected > 0;

@@ -17,11 +17,16 @@ namespace adotePet.Repositories
             const string sql = @"
                 SELECT 
                     idPet, 
-                    nomePet, 
-                    racaPet, 
-                    corPet, 
-                    especiePet, 
-                    idadePet 
+                    nome, 
+                    raca, 
+                    cor, 
+                    especie, 
+                    idade,
+                    bairro,
+                    cidade,
+                    estado,
+                    pais,
+                    idDoador
                 FROM pets;";
 
             return await _db.QueryAsync<Pet>(sql);
@@ -32,11 +37,16 @@ namespace adotePet.Repositories
             const string sql = @"
                 SELECT 
                     idPet, 
-                    nomePet, 
-                    racaPet, 
-                    corPet, 
-                    especiePet, 
-                    idadePet 
+                    nome, 
+                    raca, 
+                    cor, 
+                    especie, 
+                    idade,
+                    bairro,
+                    cidade,
+                    estado,
+                    pais,
+                    idDoador
                 FROM pets 
                 WHERE idPet = @Id;";
 
@@ -46,28 +56,33 @@ namespace adotePet.Repositories
         public async Task<Pet?> InsertPet(Pet pet)
         {
             const string sql = @"
-                INSERT INTO pets (nomePet, racaPet, corPet, especiePet, idadePet) 
-                VALUES (@nomePet, @racaPet, @corPet, @especiePet, @idadePet);
+                INSERT INTO pets (nome, raca, cor, especie, idade, bairro, cidade, estado, pais, idDoador) 
+                VALUES (@nome, @raca, @cor, @especie, @idade, @bairro, @cidade, @estado, @pais, @idDoador);
                 SELECT LAST_INSERT_ID();";
             var id = await _db.QuerySingleAsync<int>(sql, new
             {
-                NomePet = pet.nomePet,
-                RacaPet = pet.racaPet,
-                CorPet = pet.corPet,
-                EspeciePet = pet.especiePet,
-                IdadePet = pet.idadePet
+                Nome = pet.nome,
+                Raca = pet.raca,
+                Cor = pet.cor,
+                Especie = pet.especie,
+                Idade = pet.idade,
+                Bairro = pet.bairro,
+                Cidade = pet.cidade,
+                Estado = pet.estado,
+                Pais = pet.pais,
+                IdDoador = pet.idDoador
             });
 
             pet.idPet = id;
             return pet;
         }
 
-        public async Task<bool> DeletePet(int idPet)
+        public async Task<bool> DeletePet(int id)
         {
             const string sql = @"
                 DELETE FROM pets 
-                WHERE idPet = @id;";
-            var rowsAffected = await _db.ExecuteAsync(sql, new { Id = idPet });
+                WHERE idPet = @Id;";
+            var rowsAffected = await _db.ExecuteAsync(sql, new { Id = id });
             return rowsAffected > 0;
         }
 
@@ -75,20 +90,30 @@ namespace adotePet.Repositories
         {
             const string sql = @"
                 UPDATE pets 
-                SET nomePet = @nomePet, 
-                    racaPet = @racaPet, 
-                    corPet = @corPet, 
-                    especiePet = @especiePet, 
-                    idadePet = @idadePet 
+                SET nome = @nome, 
+                    raca = @raca, 
+                    cor = @cor, 
+                    especie = @especie, 
+                    idade = @idade,
+                    bairro = @bairro,
+                    cidade = @cidade,
+                    estado = @estado,
+                    pais = @pais,
+                    idDoador = @idDoador
                 WHERE idPet = @idPet;";
             var rowsAffected = await _db.ExecuteAsync(sql, new
             {
                 IdPet = pet.idPet,
-                NomePet = pet.nomePet,
-                RacaPet = pet.racaPet,
-                CorPet = pet.corPet,
-                EspeciePet = pet.especiePet,
-                IdadePet = pet.idadePet
+                Nome = pet.nome,
+                Raca = pet.raca,
+                Cor = pet.cor,
+                Especie = pet.especie,
+                Idade = pet.idade,
+                Bairro = pet.bairro,
+                Cidade = pet.cidade,
+                Estado = pet.estado,
+                Pais = pet.pais,
+                IdDoador = pet.idDoador
             });
             return rowsAffected > 0;
         }

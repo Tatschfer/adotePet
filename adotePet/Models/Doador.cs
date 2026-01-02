@@ -4,16 +4,16 @@ namespace adotePet.Models
 {
     public class Doador
     {
-        public String nomeDoador { get; set; } = String.Empty;
-        public String telefoneDoador { get; set; } = String.Empty;
-        public String emailDoador { get; set; } = String.Empty;
+        public String nome { get; set; } = String.Empty;
+        public String telefone { get; set; } = String.Empty;
+        public String email { get; set; } = String.Empty;
         public int idDoador { get; set; }
 
-        public Doador(String nomeDoador, String telefoneDoador, String emailDoador, int idDoador)
+        public Doador(int idDoador, String nome, String telefone, String email)
         {
-            this.nomeDoador = nomeDoador;
-            this.telefoneDoador = telefoneDoador;
-            this.emailDoador = emailDoador;
+            this.nome = nome;
+            this.telefone = telefone;
+            this.email = email;
             this.idDoador = idDoador;
 
         }
