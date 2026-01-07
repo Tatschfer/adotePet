@@ -15,11 +15,11 @@ builder.Services.AddScoped<IDbConnection>(_ => new MySqlConnection(conn));
 
 // Repositories
 builder.Services.AddScoped<IPetRepository, PetRepository>();
-builder.Services.AddScoped<IDoadorRepository, DoadorRepository>(); 
+builder.Services.AddScoped<IDoadorRepository, DoadorRepository>();
 
 //// Services - business rules - add dps
-//builder.Services.AddScoped<IPetService, PetService>(); 
-//builder.Services.AddScoped<IDoadorService, DoadorService>();
+builder.Services.AddScoped<IPetService, PetService>();
+//builder.services.addscoped<idoadorservice, doadorservice>();
 
 // Scalar - tipo o swagger, testando :)
 builder.Services.AddOpenApi();

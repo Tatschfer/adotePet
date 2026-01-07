@@ -31,7 +31,7 @@ namespace adotePet.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarDoador([FromBody] Models.Doador doador)
         {
-            var novoDoador = await _repo.InsertDoador(doador);
+            var novoDoador = await _repo.InsertDoador(doador); //deveria estar no service RN
             if (novoDoador == null)
                 return BadRequest("Não foi possível cadastrar o doador.");
             return CreatedAtAction(nameof(ObterDoadorById), new { id = novoDoador.idDoador }, novoDoador);
@@ -63,5 +63,7 @@ namespace adotePet.Controllers
                 return BadRequest("Não foi possível atualizar o doador.");
             return Ok("Doador atualizado com sucesso.");
         }
+
+        //POST Criar doação
     }
 }
