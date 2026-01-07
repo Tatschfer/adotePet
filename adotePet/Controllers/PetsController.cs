@@ -29,7 +29,7 @@ namespace adotePet.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterPetById(int id)
         {
-            var pet = _petService.ObterPetById();
+            var pet = _petService.ObterPetById(id);
             if (pet == null)
                 return NotFound();
             return Ok(pet);
@@ -40,7 +40,7 @@ namespace adotePet.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarPet([FromBody] Pet pet)
         {
-            var novoPet = _petService.CriarPet();
+            var novoPet = _petService.CriarPet(pet);
             if (novoPet == null)
                 return BadRequest("Não foi possível criar o pet.");
             return CreatedAtAction(nameof(ObterPetById), new { id = novoPet.idPet }, novoPet);
@@ -49,7 +49,7 @@ namespace adotePet.Controllers
         [HttpDelete]
         public async Task<IActionResult> RemoverPetById(int id)
         {
-            var petRemovido = await _petService.RemoverPetById();
+            var petRemovido = await _petService.RemoverPetById(id);
             if (petRemovido == null)
             {
                 return NotFound("Pet não encontrado");
@@ -66,10 +66,10 @@ namespace adotePet.Controllers
 
             pet.idPet = id;
 
-            var petExistente = await _petService.AtualizarPet();
+            var petExistente = await _petService.AtualizarPet(id, pet);
             if (petExistente == null)
                 return NotFound();
-            var atualizado = await _petService.AtualizarPet();
+            var atualizado = await _petService.AtualizarPet(id, pet);
             if (atualizado == null)
                 return BadRequest("Não foi possível atualizar o pet.");
             return Ok("Pet atualizado com sucesso.");
