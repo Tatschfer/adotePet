@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using adotePet.Utils;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace adotePet.Models
@@ -12,8 +13,9 @@ namespace adotePet.Models
         [StringLength(50, MinimumLength = 2, ErrorMessage = "O nome deve ter entre 2 e 50 caracteres")]
         public String nome { get; set; } = string.Empty;
 
-        [Range(0, 25, ErrorMessage = "A idade deve estar entre 0 e 25 anos")]
-        public String idade { get; set; } = string.Empty;
+        [Required(ErrorMessage = "A data de nascimento é obrigatória, preencha com DD/MM/AAAA.")]
+        [JsonConverter(typeof(CustomDateTimeConverter))]
+        public DateTime dataDeNascimento { get; set; }
 
         [Required(ErrorMessage = "A espécie do pet é obrigatória")]
         [EnumDataType(typeof(TipoPet), ErrorMessage = "Espécie de pet inválida")]
@@ -41,11 +43,11 @@ namespace adotePet.Models
 
 
 
-        public Pet(int idPet, string nome, string raca, string cor, string especie, string idade, string bairro, string cidade, string estado, string pais, int idDoador)
+        public Pet(int idPet, string nome, string raca, string cor, string especie, DateTime dataDeNascimento, string bairro, string cidade, string estado, string pais, int idDoador)
         {
             this.idPet = idPet;
             this.nome = nome;
-            this.idade = idade;
+            this.dataDeNascimento = dataDeNascimento;
             this.especie = especie;
             this.raca = raca;
             this.cor = cor;

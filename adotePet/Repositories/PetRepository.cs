@@ -21,7 +21,7 @@ namespace adotePet.Repositories
                     raca, 
                     cor, 
                     especie, 
-                    idade,
+                    dataDeNascimento,
                     bairro,
                     cidade,
                     estado,
@@ -41,7 +41,7 @@ namespace adotePet.Repositories
                     raca, 
                     cor, 
                     especie, 
-                    idade,
+                    dataDeNascimento,
                     bairro,
                     cidade,
                     estado,
@@ -56,8 +56,8 @@ namespace adotePet.Repositories
         public async Task<Pet?> InsertPet(Pet pet)
         {
             const string sql = @"
-                INSERT INTO pets (nome, raca, cor, especie, idade, bairro, cidade, estado, pais, idDoador) 
-                VALUES (@nome, @raca, @cor, @especie, @idade, @bairro, @cidade, @estado, @pais, @idDoador);
+                INSERT INTO pets (nome, raca, cor, especie, dataDeNascimento, bairro, cidade, estado, pais, idDoador) 
+                VALUES (@nome, @raca, @cor, @especie, @dataDeNascimento, @bairro, @cidade, @estado, @pais, @idDoador);
                 SELECT LAST_INSERT_ID();";
             var id = await _db.QuerySingleAsync<int>(sql, new
             {
@@ -65,7 +65,7 @@ namespace adotePet.Repositories
                 Raca = pet.raca,
                 Cor = pet.cor,
                 Especie = pet.especie,
-                Idade = pet.idade,
+                DataDeNascimento = pet.dataDeNascimento,
                 Bairro = pet.bairro,
                 Cidade = pet.cidade,
                 Estado = pet.estado,
@@ -94,7 +94,7 @@ namespace adotePet.Repositories
                     raca = @raca, 
                     cor = @cor, 
                     especie = @especie, 
-                    idade = @idade,
+                    dataDeNascimento = @dataDeNascimento,
                     bairro = @bairro,
                     cidade = @cidade,
                     estado = @estado,
@@ -108,7 +108,7 @@ namespace adotePet.Repositories
                 Raca = pet.raca,
                 Cor = pet.cor,
                 Especie = pet.especie,
-                Idade = pet.idade,
+                DataDeNascimento = pet.dataDeNascimento,
                 Bairro = pet.bairro,
                 Cidade = pet.cidade,
                 Estado = pet.estado,
