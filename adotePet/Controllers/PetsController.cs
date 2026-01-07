@@ -40,7 +40,7 @@ namespace adotePet.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarPet([FromBody] Pet pet)
         {
-            var novoPet = _petService.CriarPet(pet);
+            var novoPet = await _petService.CriarPet(pet);
             if (novoPet == null)
                 return BadRequest("Não foi possível criar o pet.");
             return CreatedAtAction(nameof(ObterPetById), new { id = novoPet.idPet }, novoPet);
