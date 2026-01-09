@@ -21,7 +21,7 @@ namespace adotePet.Controllers
         [HttpGet]
         public async Task<IActionResult> ObterPets()
         {
-            var pets = _petService.ObterPets();
+            var pets = await _petService.ObterPets();
             return Ok(pets);
 
         }
@@ -29,7 +29,7 @@ namespace adotePet.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> ObterPetById(int id)
         {
-            var pet = _petService.ObterPetById(id);
+            var pet = await _petService.ObterPetById(id);
             if (pet == null)
                 return NotFound();
             return Ok(pet);

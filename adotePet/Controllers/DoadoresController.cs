@@ -32,7 +32,7 @@ namespace adotePet.Controllers
             return Ok(doador);
         }
 
-        [HttpPost]
+        [HttpPost("criarDoador")]
         public async Task<IActionResult> CriarDoador(Doador doador)
         {
             var novoDoador = await _doadorService.CriarDoador(doador); 
@@ -68,7 +68,7 @@ namespace adotePet.Controllers
             return Ok("Doador atualizado com sucesso.");
         }
 
-        [HttpPost]
+        [HttpPost("criarDoacao")]
         public async Task<IActionResult> CriarDoacao(CriarDoacao criarDoacao)
         {
             var novaDoacao = await _doadorService.CriarDoacao(criarDoacao);

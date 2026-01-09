@@ -19,7 +19,7 @@ builder.Services.AddScoped<IDoadorRepository, DoadorRepository>();
 
 //// Services - business rules - add dps
 builder.Services.AddScoped<IPetService, PetService>();
-//builder.services.addscoped<idoadorservice, doadorservice>();
+builder.Services.AddScoped<IDoadorService, DoadorService>();
 
 // Scalar - tipo o swagger, testando :)
 builder.Services.AddOpenApi();

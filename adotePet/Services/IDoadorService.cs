@@ -9,7 +9,7 @@ namespace adotePet.Services
         Task<Doador> ObterDoadorById(int id);
 
         Task<Doador> CriarDoador(Doador doador);
-        Task<Doador> RemoverDoadorById(int idDoador);
+        Task<bool> RemoverDoadorById(int idDoador);
 
         Task<Doador> AtualizarDoador(Doador doador, int id);
 

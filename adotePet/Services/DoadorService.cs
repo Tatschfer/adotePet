@@ -33,10 +33,10 @@ namespace adotePet.Services
             return novoDoador;
         }
 
-        public async Task<Doador> RemoverDoadorById(int idDoador)
+        public async Task<bool> RemoverDoadorById(int idDoador)
         {
-            var doador = await _repo.GetByIdAsync(idDoador);
-            return doador;
+            var doador = await _repo.DeleteDoador(idDoador);
+            return true;
         }
 
         public async Task<Doador> AtualizarDoador(Doador doador, int id)
